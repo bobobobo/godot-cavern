@@ -7,7 +7,7 @@ onready var SCREEN_HEIGHT = get_viewport().size.y
 onready var SCREEN_WIDTH = get_viewport().size.x
 
 const GRAVITY = 5000
-const SPEED = 150
+const MINIMUM_SPEED = 50
 
 var state_machine = StateMachine.new()
 
@@ -16,14 +16,15 @@ var direction = 1
 var sprite
 
 var player
-
+var speed
 var level = 0
 
 signal fire(position, direction)
 
 func _ready():
+    add_to_group("enemies")
     sprite = $Sprite
-
+    speed = MINIMUM_SPEED + (randi() % 150)
     state_machine.target = self
     state_machine.add_state("run", EnemyRun.new())
     state_machine.add_state("fire", EnemyFire.new())
@@ -35,6 +36,7 @@ func fire():
 func move(delta):
     velocity.y += GRAVITY * delta
     velocity = move_and_slide(velocity, Vector2.UP)
+    velocity.x = min(velocity.x, speed)
 
 func handle_fall_in_hole():
     if position.y > SCREEN_HEIGHT:

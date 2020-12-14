@@ -3,13 +3,14 @@ extends StateMachine.State
 var pop_timer
 
 func _on_enter(_previous):
-    if target.trigger_enemies.size() == 0:
+    target.captured_enemy = target.trigger_enemies.pop_front()
+    if target.captured_enemy == null:
         state_machine.transition("float")
     pop_timer = 3
     if target.velocity.y == 0:
         target.velocity = Vector2.ZERO
     target.sprite.play("trap1")
-    target.captured_enemy = target.trigger_enemies.pop_front()
+   
     target.captured_enemy.queue_free()
     
     

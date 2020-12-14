@@ -26,7 +26,6 @@ func _ready():
     state_machine.add_state("float", BubbleFloat.new())
     state_machine.add_state("captured", BubbleCaptured.new())
     state_machine.add_state("pop", BubblePop.new())
-
     state_machine.transition("blow")
 
 func apply_gravity(delta):
@@ -51,3 +50,9 @@ func _on_Trigger_body_entered(body):
 func _on_Trigger_body_exited(body):
     if body.is_in_group("enemies") && trigger_enemies.has(body):
         trigger_enemies.erase(body)
+
+
+func _on_Trigger_area_entered(area):
+    if area.is_in_group("bolts"):
+        state_machine.transition("pop")
+        area.queue_free()

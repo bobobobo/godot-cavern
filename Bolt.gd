@@ -6,6 +6,7 @@ var velocity = Vector2.ZERO
 var SPEED = 400
 
 func _ready():
+    add_to_group("bolts")
     if direction < 0:
         $Sprite.play("left")
     else:

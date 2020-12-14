@@ -68,9 +68,10 @@ shape = SubResource( 2 )
 
 [node name="Trigger" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 32
+collision_mask = 96
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
 shape = SubResource( 2 )
+[connection signal="area_entered" from="Trigger" to="." method="_on_Trigger_area_entered"]
 [connection signal="body_entered" from="Trigger" to="." method="_on_Trigger_body_entered"]
 [connection signal="body_exited" from="Trigger" to="." method="_on_Trigger_body_exited"]

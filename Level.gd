@@ -72,11 +72,10 @@ func generate_enemies():
     enemies = []
     active_enemies = []
     reset_enemy_spawn_timer()
-    for i in range(0, get_maximum_enemies()):
+    for _i in range(0, get_maximum_enemies()):
         var enemy = Enemy.instance()
         enemy.level = level_no
         enemies.append(enemy)
-        enemy.add_to_group("enemies")
         enemy.connect("tree_exited", self, "on_enemy_died", [enemy])
         enemy.connect("fire", self, "on_enenmy_fired")
     

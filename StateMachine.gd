@@ -37,11 +37,12 @@ func transition(new_state):
         return
     if DEBUG:
         print(new_state)
+    call_deferred("_enter_state", new_state)
+ 
+
+func _enter_state(new_state):
     _previous_state = _state
     _state = states[new_state]
-    call_deferred("_enter_state")
-
-func _enter_state():
     if _previous_state != null:
         if(_previous_state.has_method("_on_exit")):
             _previous_state._on_exit(_state.id)

@@ -6,7 +6,7 @@ var level_fire_probability
 func _on_enter(_previous):
     level_fire_probability = 0.001 + (0.0001 * min(100, target.level))
     reset_direction_change_timer()
-    target.velocity.x = target.direction * target.SPEED
+    target.velocity.x = target.direction * target.speed
     set_animation()
 
 func set_animation():
@@ -25,7 +25,7 @@ func _process(delta):
         if target.player != null:
             directions.append(sign(target.player.position.x - target.position.x))
         target.direction  = directions[randi() % directions.size()]
-        target.velocity.x = target.direction * target.SPEED
+        target.velocity.x = target.direction * target.speed
         set_animation()
         reset_direction_change_timer()
         
@@ -42,6 +42,6 @@ func _physics_process(delta):
     target.handle_fall_in_hole()
     if target.is_on_wall():
         target.direction = -target.direction;
-        target.velocity.x = target.direction * target.SPEED
+        target.velocity.x = target.direction * target.speed
         set_animation()
 
