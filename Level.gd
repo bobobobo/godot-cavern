@@ -4,7 +4,8 @@ const Block = preload("res://Block.tscn")
 const Enemy = preload("res://Enemy.tscn")
 const AggresiveEnemy = preload("res://AggresiveEnemy.tscn")
 
-onready var SCREEN_WIDTH = get_viewport().size.x
+onready var SCREEN_HEIGHT = get_viewport().get_visible_rect().size.y
+onready var SCREEN_WIDTH = get_viewport().get_visible_rect().size.x
 
 const FIRST_BLOCK_POSITION = Vector2(62.5, 12.5)
 const BLOCK_SIZE = 25

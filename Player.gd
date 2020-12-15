@@ -7,8 +7,8 @@ const PlayerDie = preload("res://PlayerDie.gd")
 const PlayerBlow = preload("res://PlayerBlow.gd")
 const PlayerHit = preload("res://PlayerHit.gd")
 
-onready var SCREEN_HEIGHT = get_viewport().size.y
-onready var SCREEN_WIDTH = get_viewport().size.x
+onready var SCREEN_HEIGHT = get_viewport().get_visible_rect().size.y
+onready var SCREEN_WIDTH = get_viewport().get_visible_rect().size.x
 
 const GRAVITY = 5000
 const JUMP_SPEED = -1100
@@ -49,6 +49,7 @@ func restart():
     health = 3
     state_machine.transition("idle")
     position = Vector2(SCREEN_WIDTH / 2, 100)
+    print(position)
 
 func hurt():
     health -= 1

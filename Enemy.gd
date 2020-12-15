@@ -3,8 +3,8 @@ extends KinematicBody2D
 const EnemyRun = preload("res://EnemyRun.gd")
 const EnemyFire = preload("res://EnemyFire.gd")
 
-onready var SCREEN_HEIGHT = get_viewport().size.y
-onready var SCREEN_WIDTH = get_viewport().size.x
+onready var SCREEN_HEIGHT = get_viewport().get_visible_rect().size.y
+onready var SCREEN_WIDTH = get_viewport().get_visible_rect().size.x
 
 const GRAVITY = 5000
 const MINIMUM_SPEED = 50

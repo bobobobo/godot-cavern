@@ -54,7 +54,7 @@ texture = ExtResource( 13 )
 [node name="PressSpace" type="AnimatedSprite" parent="MainMenu"]
 position = Vector2( 0, 100 )
 frames = SubResource( 7 )
-frame = 11
+frame = 19
 playing = true
 
 [node name="Level" type="Node2D" parent="."]
