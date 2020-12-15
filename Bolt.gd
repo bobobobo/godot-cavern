@@ -16,3 +16,7 @@ func _ready():
 
 func _physics_process(delta):
     position = position + velocity * delta
+
+func _on_Bolt_body_entered(body):
+    if body.get_collision_layer_bit(2) || body.get_collision_layer_bit(1):
+        queue_free()

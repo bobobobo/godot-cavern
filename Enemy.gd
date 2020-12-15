@@ -41,8 +41,10 @@ func fire():
 func move(delta):
     velocity.y += GRAVITY * delta
     velocity = move_and_slide(velocity, Vector2.UP)
-    velocity.x = min(velocity.x, speed)
-
+    if velocity.x > 0:
+        velocity.x = min(velocity.x, speed)
+    elif velocity.x < 0:
+        velocity.x = max(velocity.x, -speed)
 func handle_fall_in_hole():
     if position.y > SCREEN_HEIGHT:
         position.y = 0

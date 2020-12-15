@@ -10,6 +10,7 @@ func _on_enter(previous):
     else:
         target.sprite.play("recoil_right")
     target.velocity.x = -sign(target.hit_direction) * target.SPEED * 1.5
+    target.velocity.y = target.JUMP_SPEED / 2
     recoil_timer = target.get_tree().create_timer(0.2)
 
     previous_state = previous

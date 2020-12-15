@@ -56,7 +56,7 @@ func hurt():
     emit_signal("hurt")
     if health <= 0 && state_machine.get_state() != "die":
         state_machine.transition("die")
-    elif state_machine.get_state() != "hit":
+    elif state_machine.get_state() != "die" && state_machine.get_state() != "hit":
         state_machine.transition("hit")
     
 func trigger_death():
