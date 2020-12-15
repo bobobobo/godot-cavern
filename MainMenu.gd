@@ -2,6 +2,9 @@ extends Node2D
 
 signal start_game
 
+func _ready():
+    $PressSpace.play()
+
 func show():
     visible = true
 
