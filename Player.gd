@@ -5,6 +5,7 @@ const PlayerRun = preload("res://PlayerRun.gd")
 const PlayerJump = preload("res://PlayerJump.gd")
 const PlayerDie = preload("res://PlayerDie.gd")
 const PlayerBlow = preload("res://PlayerBlow.gd")
+const PlayerHit = preload("res://PlayerHit.gd")
 
 onready var SCREEN_HEIGHT = get_viewport().size.y
 onready var SCREEN_WIDTH = get_viewport().size.x
@@ -17,7 +18,7 @@ var state_machine = StateMachine.new()
 
 var velocity = Vector2.ZERO
 var last_movement = Vector2.RIGHT
-
+var hit_direction = 0
 var sprite
 
 var blink_timer = 0
@@ -36,6 +37,8 @@ func _ready():
     state_machine.add_state("jump", PlayerJump.new())
     state_machine.add_state("die", PlayerDie.new())
     state_machine.add_state("blow", PlayerBlow.new())
+    state_machine.add_state("hit", PlayerHit.new())
+
     state_machine.DEBUG = true
     restart()
     
@@ -49,6 +52,8 @@ func hurt():
     health -= 1
     if health <= 0 && state_machine.get_state() != "die":
         state_machine.transition("die")
+    elif state_machine.get_state() != "hit":
+        state_machine.transition("hit")
     
 func trigger_death():
     $AnimationPlayer.play("normal")
@@ -78,6 +83,7 @@ func _physics_process(delta):
 
 func _on_Trigger_area_entered(area):
     if blink_timer <= 0:
+        hit_direction = sign(area.position.x - position.x)
         $AnimationPlayer.play("hurt")
         blink_timer = 2
         hurt()

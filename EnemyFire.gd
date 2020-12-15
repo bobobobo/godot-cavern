@@ -6,9 +6,9 @@ func _on_enter(_previous):
 
 func set_animation():
     if target.direction<0:
-        target.sprite.play("fire_left_1")
+        target.sprite.play("fire_left")
     elif target.direction>0:
-        target.sprite.play("fire_right_1")
+        target.sprite.play("fire_right")
 
 
 func _process(_delta):

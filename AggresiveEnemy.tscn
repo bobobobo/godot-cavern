@@ -1,0 +1,60 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/robot112.png" type="Texture" id=2]
+[ext_resource path="res://images/robot116.png" type="Texture" id=3]
+[ext_resource path="res://images/robot101.png" type="Texture" id=4]
+[ext_resource path="res://images/robot117.png" type="Texture" id=5]
+[ext_resource path="res://images/robot107.png" type="Texture" id=6]
+[ext_resource path="res://images/robot111.png" type="Texture" id=7]
+[ext_resource path="res://images/robot106.png" type="Texture" id=8]
+[ext_resource path="res://images/robot104.png" type="Texture" id=9]
+[ext_resource path="res://images/robot114.png" type="Texture" id=10]
+[ext_resource path="res://images/robot102.png" type="Texture" id=11]
+[ext_resource path="res://images/robot103.png" type="Texture" id=12]
+[ext_resource path="res://images/robot113.png" type="Texture" id=13]
+[ext_resource path="res://images/robot105.png" type="Texture" id=14]
+[ext_resource path="res://images/robot115.png" type="Texture" id=15]
+[ext_resource path="res://AggresiveEnemy.gd" type="Script" id=16]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 15 ), ExtResource( 3 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "fire_right",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 8 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "fire_left",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 2 ), ExtResource( 13 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "right",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 200, 30 )
+
+[node name="AggresiveEnemy" instance=ExtResource( 1 )]
+script = ExtResource( 16 )
+
+[node name="Sprite" parent="." index="0"]
+frames = SubResource( 1 )
+animation = "fire_right"
+
+[node name="BubbleScanner" type="Area2D" parent="." index="2"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BubbleScanner" index="0"]
+shape = SubResource( 2 )
+[connection signal="body_entered" from="BubbleScanner" to="." method="_on_BubbleScanner_body_entered"]
+[connection signal="body_exited" from="BubbleScanner" to="." method="_on_BubbleScanner_body_exited"]

@@ -19,6 +19,8 @@ var player
 var speed
 var level = 0
 
+var type = 1
+
 signal fire(position, direction)
 
 func _ready():
@@ -26,6 +28,9 @@ func _ready():
     sprite = $Sprite
     speed = MINIMUM_SPEED + (randi() % 150)
     state_machine.target = self
+    setup_states()
+
+func setup_states():
     state_machine.add_state("run", EnemyRun.new())
     state_machine.add_state("fire", EnemyFire.new())
     state_machine.transition("run")

@@ -18,24 +18,24 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "right_1",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ) ],
 "loop": false,
-"name": "fire_right_2",
-"speed": 5.0
+"name": "fire_right",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 12 ) ],
 "loop": false,
-"name": "fire_left_1",
-"speed": 5.0
+"name": "fire_left",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 9 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 8 ) ],
 "loop": true,
-"name": "left_1",
+"name": "left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "right",
 "speed": 5.0
 } ]
 
@@ -53,7 +53,7 @@ __meta__ = {
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "fire_right_2"
+animation = "right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 6 )

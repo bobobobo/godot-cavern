@@ -6,11 +6,13 @@ func _on_enter(_previous):
     target.captured_enemy = target.trigger_enemies.pop_front()
     if target.captured_enemy == null:
         state_machine.transition("float")
+
     pop_timer = 3
     if target.velocity.y == 0:
         target.velocity = Vector2.ZERO
-    target.sprite.play("trap1")
-   
+
+    target.sprite.play("trap" + str(target.captured_enemy.type))
+
     target.captured_enemy.queue_free()
     
     

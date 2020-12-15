@@ -2,6 +2,7 @@ extends Node
 
 const Block = preload("res://Block.tscn")
 const Enemy = preload("res://Enemy.tscn")
+const AggresiveEnemy = preload("res://AggresiveEnemy.tscn")
 
 onready var SCREEN_WIDTH = get_viewport().size.x
 
@@ -64,20 +65,35 @@ func set_level_no(new_level):
     
 func get_maximum_enemies_on_screen():
     return min(int((level_no + 6) / 2), 8)
-    
+
 func get_maximum_enemies():
     return level_no + 10
+
+func get_aggresive_enemies_number():
+    return 1 + int(level_no / 1.5)
+
+func get_normal_enemies_number():
+    return get_maximum_enemies() - get_aggresive_enemies_number()
     
 func generate_enemies():
     enemies = []
     active_enemies = []
     reset_enemy_spawn_timer()
-    for _i in range(0, get_maximum_enemies()):
+
+    for _i in range(0, get_normal_enemies_number()):
         var enemy = Enemy.instance()
-        enemy.level = level_no
         enemies.append(enemy)
+
+    for _i in range(0, get_aggresive_enemies_number()):
+        var enemy = AggresiveEnemy.instance()
+        enemies.append(enemy)
+
+    for enemy in enemies:
+        enemy.level = level_no
         enemy.connect("tree_exited", self, "on_enemy_died", [enemy])
         enemy.connect("fire", self, "on_enenmy_fired")
+
+    enemies.shuffle()
     
 func on_enemy_died(enemy):
     active_enemies.erase(enemy)
