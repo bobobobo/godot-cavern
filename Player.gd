@@ -27,8 +27,10 @@ var health
 
 signal blow(position)
 signal death
+signal hurt
 
 func _ready():
+    health = 3
     sprite = $Sprite
     
     state_machine.target = self
@@ -50,6 +52,7 @@ func restart():
 
 func hurt():
     health -= 1
+    emit_signal("hurt")
     if health <= 0 && state_machine.get_state() != "die":
         state_machine.transition("die")
     elif state_machine.get_state() != "hit":

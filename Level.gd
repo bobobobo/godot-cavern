@@ -76,6 +76,8 @@ func get_normal_enemies_number():
     return get_maximum_enemies() - get_aggresive_enemies_number()
     
 func generate_enemies():
+    for enemy in active_enemies:
+        enemy.queue_free()
     enemies = []
     active_enemies = []
     reset_enemy_spawn_timer()
