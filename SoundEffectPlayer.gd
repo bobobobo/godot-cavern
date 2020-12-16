@@ -15,6 +15,10 @@ func add_sound(name, files):
     sounds[name] = streams
     
 func play(name):
+    call_deferred("_play", name)
+
+
+func _play(name):
     if not name in sounds:
         return
     var asp = AudioStreamPlayer.new()

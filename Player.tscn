@@ -23,16 +23,6 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "blow_left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "stand_right",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 15 ), ExtResource( 20 ), ExtResource( 5 ), ExtResource( 18 ) ],
 "loop": true,
 "name": "run_right",
@@ -78,6 +68,16 @@ animations = [ {
 "name": "jump_left",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "stand_right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "blow_left",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "idle",
@@ -121,7 +121,7 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 400, 65.5 )
+position = Vector2( 400, 63.5 )
 collision_mask = 2147483654
 script = ExtResource( 11 )
 __meta__ = {

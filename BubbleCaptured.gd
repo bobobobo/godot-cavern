@@ -6,6 +6,7 @@ func _on_enter(_previous):
     target.captured_enemy = target.trigger_enemies.pop_front()
     if target.captured_enemy == null:
         state_machine.transition("float")
+        return
 
     pop_timer = 3
     if target.velocity.y == 0:
