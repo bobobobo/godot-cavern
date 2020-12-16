@@ -10,10 +10,13 @@ func _on_enter(previous):
         target.sprite.play("recoil_right")
     SoundEffectPlayer.play("hit")
     target.velocity.x = -sign(target.hit_direction) * target.SPEED * 1.5
-    target.velocity.y = target.JUMP_SPEED / 2
+    if target.velocity.y == 0 and previous != "jump":
+        target.velocity.y = target.JUMP_SPEED / 2
     recoil_timer = target.get_tree().create_timer(0.2)
-
-    previous_state = previous
+    if previous != "jump":
+        previous_state = previous
+    else: 
+        previous_state = "idle"
     
 func _on_exit(_new_state):
     recoil_timer = null
