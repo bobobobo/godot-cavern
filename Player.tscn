@@ -139,9 +139,8 @@ position = Vector2( 0, 4.5 )
 shape = SubResource( 2 )
 
 [node name="Trigger" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
-collision_mask = 64
+collision_mask = 80
 
 [node name="TriggerCollisionShape" type="CollisionShape2D" parent="Trigger"]
 position = Vector2( 0, 4.5 )
@@ -151,3 +150,4 @@ shape = SubResource( 2 )
 anims/hurt = SubResource( 3 )
 anims/normal = SubResource( 4 )
 [connection signal="area_entered" from="Trigger" to="." method="_on_Trigger_area_entered"]
+[connection signal="body_entered" from="Trigger" to="." method="_on_Trigger_body_entered"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Collectible.gd" type="Script" id=1]
+[ext_resource path="res://images/pop05.png" type="Texture" id=2]
+[ext_resource path="res://images/pop03.png" type="Texture" id=3]
+[ext_resource path="res://images/pop04.png" type="Texture" id=4]
+[ext_resource path="res://images/pop06.png" type="Texture" id=5]
+[ext_resource path="res://images/pop00.png" type="Texture" id=6]
+[ext_resource path="res://images/pop02.png" type="Texture" id=7]
+[ext_resource path="res://images/pop01.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "default",
+"speed": 20.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 22.0
+
+[node name="Collectible" type="KinematicBody2D" groups=[
+"collectibles",
+]]
+position = Vector2( 255.5, 154.531 )
+collision_layer = 16
+collision_mask = 6
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+
+[node name="PickupSprite" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )

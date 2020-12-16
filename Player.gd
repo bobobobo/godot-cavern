@@ -27,7 +27,8 @@ var health
 
 signal blow(position)
 signal death
-signal hurt
+signal health_changed
+signal pickup(collectible)
 
 func _ready():
     health = 3
@@ -53,7 +54,7 @@ func restart():
 
 func hurt():
     health -= 1
-    emit_signal("hurt")
+    emit_signal("health_changed")
     if health <= 0 && state_machine.get_state() != "die":
         state_machine.transition("die")
     elif state_machine.get_state() != "die" && state_machine.get_state() != "hit":
@@ -86,9 +87,19 @@ func _physics_process(delta):
 
 
 func _on_Trigger_area_entered(area):
-    if blink_timer <= 0:
-        hit_direction = sign(area.position.x - position.x)
-        $AnimationPlayer.play("hurt")
-        blink_timer = 2
-        hurt()
-    area.queue_free()
+    if area.get_collision_layer_bit(6):
+        if blink_timer <= 0:
+            hit_direction = sign(area.position.x - position.x)
+            $AnimationPlayer.play("hurt")
+            blink_timer = 2
+            hurt()
+        area.queue_free()
+
+
+func _on_Trigger_body_entered(body):
+    if body is Collectible:
+        if "health" in body:
+            health = min(health + body.health, 3)
+            emit_signal("health_changed")
+        emit_signal("pickup", body)
+        body.collected()

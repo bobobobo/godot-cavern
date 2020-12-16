@@ -28,6 +28,7 @@ func _on_Player_blow(position):
         bubble.direction = 1
     bubble.position.x += bubble.direction*25 
     bubble.add_to_group("bubbles")
+    bubble.connect("popped", self, "_on_bubble_popped")
     add_child(bubble)
 
 func change_level(new_level):
@@ -49,6 +50,9 @@ func _on_enemy_fired(position, direction):
     bolt.direction = direction
     add_child(bolt)
 
+func _on_bubble_popped(bubble):
+    if bubble.captured_enemy != null:
+        $Level.spawn_collectible(bubble.position, bubble.captured_enemy.type == 2)
 
 
 func _on_Player_death():
@@ -66,9 +70,18 @@ func _on_Player_death():
 
 
 
-func _on_Player_hurt():
-    player_health -= 1
+func _on_Player_health_changed():
+    player_health = player.health
     $HUD.health = player_health
+
+func _on_Player_pickup(collectible):
+    if "score" in collectible:            
+        player_score += collectible.score
+        $HUD.score = player_score
+    if "lives" in collectible:
+        player_lives += collectible.lives
+        $HUD.lives = player_lives
+    
 
 func _on_GameOver_restart():
     change_level(0)
@@ -81,7 +94,9 @@ func _on_MainMenu_start_game():
     
     player.connect("blow", self, "_on_Player_blow")
     player.connect("death", self, "_on_Player_death")
-    player.connect("hurt", self, "_on_Player_hurt")
+    player.connect("health_changed", self, "_on_Player_health_changed")
+    player.connect("pickup", self, "_on_Player_pickup")
+
     add_child(player)
     move_child(player, 0)
     change_level(0)

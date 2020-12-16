@@ -39,7 +39,7 @@ func fire():
     var fire_probability = level_fire_probability
     if is_on_same_y_level(target.player):
         fire_probability *= 10
-        
+
     if randf() < fire_probability:
         state_machine.transition("fire")
 

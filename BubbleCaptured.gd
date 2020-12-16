@@ -12,8 +12,7 @@ func _on_enter(_previous):
         target.velocity = Vector2.ZERO
 
     target.sprite.play("trap" + str(target.captured_enemy.type))
-
-    target.captured_enemy.queue_free()
+    target.captured_enemy.get_parent().remove_child(target.captured_enemy)
     
     
 func _process(delta):

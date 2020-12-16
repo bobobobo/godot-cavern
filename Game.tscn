@@ -54,6 +54,7 @@ texture = ExtResource( 13 )
 [node name="PressSpace" type="AnimatedSprite" parent="MainMenu"]
 position = Vector2( 0, 100 )
 frames = SubResource( 1 )
+frame = 9
 
 [node name="Level" type="Node2D" parent="."]
 z_index = -1
@@ -85,8 +86,6 @@ shape = SubResource( 5 )
 visible = false
 position = Vector2( 0, 450 )
 script = ExtResource( 25 )
-
-[node name="LivesAndHealth" type="Node2D" parent="HUD"]
 
 [node name="LevelLabel" type="Label" parent="HUD"]
 margin_left = 380.0

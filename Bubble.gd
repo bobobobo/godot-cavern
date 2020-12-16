@@ -5,6 +5,8 @@ const BubbleFloat = preload("res://BubbleFloat.gd")
 const BubblePop = preload("res://BubblePop.gd")
 const BubbleCaptured = preload("res://BubbleCaptured.gd")
 
+signal popped(bubble)
+
 const GRAVITY = 200
 
 var state_machine = StateMachine.new()
@@ -56,3 +58,7 @@ func _on_Trigger_area_entered(area):
     if area.is_in_group("bolts"):
         state_machine.transition("pop")
         area.queue_free()
+
+func _on_Bubble_tree_exited():
+    if captured_enemy != null:
+        captured_enemy.queue_free()

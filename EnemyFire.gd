@@ -1,7 +1,9 @@
 extends StateMachine.State
 
+var fired 
 
 func _on_enter(_previous):
+    fired = false
     set_animation()
 
 func set_animation():
@@ -12,7 +14,8 @@ func set_animation():
 
 
 func _process(_delta):
-    if target.sprite.frame >= target.sprite.frames.get_frame_count(target.sprite.animation)-1:
+    if not fired and target.sprite.frame >= target.sprite.frames.get_frame_count(target.sprite.animation) - 1:
+        fired = true
         target.fire()
         state_machine.transition("run")
     

@@ -3,6 +3,11 @@ extends Node
 const Block = preload("res://Block.tscn")
 const Enemy = preload("res://Enemy.tscn")
 const AggresiveEnemy = preload("res://AggresiveEnemy.tscn")
+const Apple = preload("res://Apple.tscn")
+const Raspberry = preload("res://Raspberry.tscn")
+const Lemon = preload("res://Lemon.tscn")
+const Life = preload("res://Life.tscn")
+const Health = preload("res://Health.tscn")
 
 onready var SCREEN_HEIGHT = get_viewport().get_visible_rect().size.y
 onready var SCREEN_WIDTH = get_viewport().get_visible_rect().size.x
@@ -53,8 +58,10 @@ signal enemy_fired(position,direction)
 var level_no = 0 setget set_level_no
 var enemies = []
 var active_enemies = []
+var collectible_spawn_points = []
 var next_enemy_timer
 var level_cleared_timer = 0
+var collectible_spawn_timer
 
 func _ready():
     randomize()
@@ -107,10 +114,34 @@ func on_enenmy_fired(position, direction):
     emit_signal("enemy_fired", position, direction)
     
 func start():
+    for child in get_children():
+        if child.is_in_group("collectibles"):
+            child.queue_free()
+    
     $Background.set_frame(level_no%4)
+    generate_collectible_spawn_points()
     generate_enemies()
     draw_level()
+    if collectible_spawn_timer != null && collectible_spawn_timer.is_connected("timeout", self, "_on_spawn_timer_timeout"):
+        collectible_spawn_timer.disconnect("timeout", self, "_on_spawn_timer_timeout")
+    collectible_spawn_timer = get_tree().create_timer(2 + randf() * 5)
+    collectible_spawn_timer.connect("timeout", self, "_on_spawn_timer_timeout")
+
     
+func generate_collectible_spawn_points():
+    collectible_spawn_points = []
+    var y = FIRST_BLOCK_POSITION.y
+    var level = LEVELS[level_no%3]
+    for line in level:
+        var x = FIRST_BLOCK_POSITION.x
+        if line.length() == 0:
+            line = "                            "
+        for c in line:
+            if c == " ":
+                collectible_spawn_points.append(Vector2(x, y))
+            x += BLOCK_SIZE
+        y += BLOCK_SIZE
+
 func draw_level():
     for child in get_children():
         if child.is_in_group("level_blocks"):
@@ -165,7 +196,29 @@ func spawn_enemy():
     emit_signal("enemy_spawned", enemy)
     reset_enemy_spawn_timer()
 
-        
+func spawn_collectible(position, bonus):
+    var available = []  
+    if not bonus:
+        available = [Apple, Raspberry, Lemon]
+      
+    else:
+        print("BONUS!")
+        for _i in 10:
+            available += [Apple, Raspberry, Lemon]
+        for _i in 9:
+            available += [Health]
+        available += [Life]  
+
+    var type = available[randi() % available.size()]
+    var instance = type.instance()
+    instance.position = position
+    add_child(instance)
+
+func _on_spawn_timer_timeout():
+    spawn_collectible(collectible_spawn_points[randi() % collectible_spawn_points.size()], false)
+    collectible_spawn_timer = get_tree().create_timer(2 + randf() * 5)
+    collectible_spawn_timer.connect("timeout", self, "_on_spawn_timer_timeout")
+
 func _process(delta):
     next_enemy_timer -= delta
     if next_enemy_timer <= 0:
