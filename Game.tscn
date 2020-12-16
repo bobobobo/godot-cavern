@@ -22,7 +22,7 @@
 [ext_resource path="res://GameOver.gd" type="Script" id=26]
 [ext_resource path="res://images/over.png" type="Texture" id=27]
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 6 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 17 ) ],
 "loop": true,
@@ -30,7 +30,7 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ) ],
 "loop": true,
@@ -38,7 +38,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 25, 240 )
 
 [node name="Game" type="Node2D"]
@@ -53,7 +53,7 @@ texture = ExtResource( 13 )
 
 [node name="PressSpace" type="AnimatedSprite" parent="MainMenu"]
 position = Vector2( 0, 100 )
-frames = SubResource( 7 )
+frames = SubResource( 1 )
 
 [node name="Level" type="Node2D" parent="."]
 z_index = -1
@@ -62,7 +62,7 @@ script = ExtResource( 2 )
 [node name="Background" type="AnimatedSprite" parent="Level"]
 position = Vector2( 400, 240 )
 z_index = -3
-frames = SubResource( 5 )
+frames = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -75,11 +75,11 @@ __meta__ = {
 }
 
 [node name="Left" type="CollisionShape2D" parent="Level/Walls"]
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="Right" type="CollisionShape2D" parent="Level/Walls"]
 position = Vector2( 750, 0 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="HUD" type="Node2D" parent="."]
 visible = false
@@ -87,6 +87,29 @@ position = Vector2( 0, 450 )
 script = ExtResource( 25 )
 
 [node name="LivesAndHealth" type="Node2D" parent="HUD"]
+
+[node name="LevelLabel" type="Label" parent="HUD"]
+margin_left = 380.0
+margin_top = 1.0
+margin_right = 420.0
+margin_bottom = 30.0
+grow_horizontal = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+margin_left = 800.0
+margin_top = 1.0
+margin_right = 800.0
+margin_bottom = 30.0
+grow_horizontal = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LivesAndHealthLabel" type="Label" parent="HUD"]
+margin_bottom = 30.0
 
 [node name="GameOver" type="Sprite" parent="."]
 pause_mode = 2

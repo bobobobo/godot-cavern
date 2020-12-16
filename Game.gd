@@ -8,13 +8,14 @@ var level = 0
 
 var player_lives = 3
 var player_health = 3
-
+var player_score = 0
 var player
 
 func _ready():
-    $Level.level_no = level
     $HUD.lives = player_lives
     $HUD.health = player_health
+    $HUD.score = player_score
+    change_level(0)
 
 func _on_Player_blow(position):
     if player == null:
@@ -29,11 +30,13 @@ func _on_Player_blow(position):
     bubble.add_to_group("bubbles")
     add_child(bubble)
 
-
+func change_level(new_level):
+    self.level = new_level
+    $Level.level_no = new_level
+    $HUD.level = new_level
 
 func _on_level_cleared():
-    level += 1
-    $Level.level_no = level
+    change_level(level + 1)
     player.restart()
 
 
@@ -68,7 +71,7 @@ func _on_Player_hurt():
     $HUD.health = player_health
 
 func _on_GameOver_restart():
-    $Level.level_no = 0
+    change_level(0)
     player.queue_free()
     $MainMenu.show()
 
@@ -81,6 +84,6 @@ func _on_MainMenu_start_game():
     player.connect("hurt", self, "_on_Player_hurt")
     add_child(player)
     move_child(player, 0)
-    $Level.level_no = 0
+    change_level(0)
     $HUD.visible = true
     player.restart()
