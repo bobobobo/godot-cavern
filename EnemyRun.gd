@@ -7,6 +7,7 @@ func _on_enter(_previous):
     level_fire_probability = 0.001 + (0.0001 * min(100, target.level))
     reset_direction_change_timer()
     target.velocity.x = target.direction * target.speed
+    target.sprite.play("right")
     set_animation()
 
 func set_animation():
