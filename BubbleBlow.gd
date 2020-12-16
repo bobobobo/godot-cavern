@@ -8,6 +8,7 @@ var initial_x
 func _on_enter(_previous_state):
     target.velocity.x = target.direction * SPEED
     initial_x = target.position.x
+    SoundEffectPlayer.play("blow")
     target.sprite.play("blow")
 
     

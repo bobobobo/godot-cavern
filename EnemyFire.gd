@@ -17,6 +17,7 @@ func _process(_delta):
     if not fired and target.sprite.frame >= target.sprite.frames.get_frame_count(target.sprite.animation) - 1:
         fired = true
         target.fire()
+        SoundEffectPlayer.play("laser")
         state_machine.transition("run")
     
     

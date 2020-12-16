@@ -69,6 +69,7 @@ func _ready():
     
 func set_level_no(new_level):
     level_no = new_level
+    SoundEffectPlayer.play("level")
     start()
     
 func get_maximum_enemies_on_screen():

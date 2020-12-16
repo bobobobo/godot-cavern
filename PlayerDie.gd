@@ -2,6 +2,7 @@ extends StateMachine.State
 
 func _on_enter(_previous):
     target.sprite.play("die")
+    SoundEffectPlayer.play("die")
     target.velocity = Vector2(0, target.JUMP_SPEED)
     target.get_node("CollisionShape").disabled=true
 

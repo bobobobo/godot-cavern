@@ -12,6 +12,7 @@ func _on_enter(_previous):
         target.velocity = Vector2.ZERO
 
     target.sprite.play("trap" + str(target.captured_enemy.type))
+    SoundEffectPlayer.play("trap")
     target.captured_enemy.get_parent().remove_child(target.captured_enemy)
     
     

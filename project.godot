@@ -30,6 +30,10 @@ config/name="Cavern"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+SoundEffectPlayer="*res://SoundEffectPlayer.gd"
+
 [display]
 
 window/size/width=800

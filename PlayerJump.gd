@@ -3,6 +3,7 @@ extends StateMachine.State
 func _on_enter(previous):
     # Only jump if we did not return here from blow state
     if previous != "blow":
+        SoundEffectPlayer.play("jump")
         target.velocity.y = target.JUMP_SPEED
     
 func get_input():

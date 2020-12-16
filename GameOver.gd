@@ -4,6 +4,7 @@ signal restart
 
 func show():
     visible = true
+    SoundEffectPlayer.play("over")
     get_tree().paused = true   
 
 func _process(_delta):

@@ -90,6 +90,7 @@ func _on_Trigger_area_entered(area):
     if area.get_collision_layer_bit(6):
         if blink_timer <= 0:
             hit_direction = sign(area.position.x - position.x)
+            SoundEffectPlayer.play("ouch")
             $AnimationPlayer.play("hurt")
             blink_timer = 2
             hurt()
@@ -100,6 +101,7 @@ func _on_Trigger_body_entered(body):
     if body is Collectible:
         if "health" in body:
             health = min(health + body.health, 3)
+            SoundEffectPlayer.play("bonus")
             emit_signal("health_changed")
         emit_signal("pickup", body)
         body.collected()

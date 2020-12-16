@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/land3.ogg-65ca540575f2f5b83b4e7a83707b96eb.oggstr"
+
+[deps]
+
+source_file="res://sounds/land3.ogg"
+dest_files=[ "res://.import/land3.ogg-65ca540575f2f5b83b4e7a83707b96eb.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
